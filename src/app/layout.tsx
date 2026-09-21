@@ -6,6 +6,7 @@ import { ThemeProvider } from "@/components/ThemeProvider";
 import { LocaleProvider } from "@/lib/LocaleProvider";
 import { ScrollToTop } from "@/components/ScrollToTop";
 import { SITE_URL } from "@/lib/site";
+import { profile } from "@/lib/data";
 import profilePhoto from "@/assets/profile.jpeg";
 
 const spaceGrotesk = Space_Grotesk({
@@ -34,9 +35,19 @@ export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title,
   description,
+  keywords: [
+    "Abdurauf Ahmadjonov",
+    "Abdurauf Ahmadjonov portfolio",
+    "Full-Stack Developer",
+    "Python Django Developer",
+    "Next.js Developer Uzbekistan",
+  ],
+  alternates: { canonical: SITE_URL },
   openGraph: {
     title,
     description,
+    url: SITE_URL,
+    siteName: title,
     images: [{ url: profilePhoto.src, width: profilePhoto.width, height: profilePhoto.height }],
   },
   twitter: {
@@ -44,6 +55,25 @@ export const metadata: Metadata = {
     title,
     description,
     images: [profilePhoto.src],
+  },
+  verification: {
+    google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION,
+  },
+};
+
+const personJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: profile.name,
+  url: SITE_URL,
+  image: `${SITE_URL}${profilePhoto.src}`,
+  jobTitle: "Full-Stack Developer",
+  email: `mailto:${profile.email}`,
+  sameAs: [profile.github, profile.linkedin, profile.telegram],
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: "Tashkent",
+    addressCountry: "UZ",
   },
 };
 
@@ -55,10 +85,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       className={`${spaceGrotesk.variable} ${inter.variable} ${jetbrainsMono.variable}`}
     >
       <body className="min-h-full antialiased">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
+        />
         <div className="bg-wash" aria-hidden="true">
           <span className="bg-wash-blob" />
         </div>
-        <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false}>
+        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false}>
           <LocaleProvider>
             {children}
             <ScrollToTop />
