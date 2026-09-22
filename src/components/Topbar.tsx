@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
@@ -9,6 +10,7 @@ import { useActiveSection } from "@/lib/useActiveSection";
 import { useLocale } from "@/lib/LocaleProvider";
 import { ThemeToggle } from "./ThemeToggle";
 import { LanguageSwitcher } from "./LanguageSwitcher";
+import logoMark from "@/assets/logo-mark.png";
 
 const SECTION_IDS = ["about", "services", "projects", "blog", "contact"];
 
@@ -69,18 +71,12 @@ export function Topbar() {
       <div className="card mx-auto max-w-[1080px] rounded-[1.75rem] px-3 py-2 sm:px-4 lg:rounded-full">
         <div className="flex items-center gap-2 sm:gap-3">
           <Link href="/#about" data-hover className="flex flex-none items-center gap-2 rounded-full px-1.5 py-1">
-            <svg viewBox="0 0 56 56" className="h-7 w-7">
-              <rect x="1" y="1" width="54" height="54" rx="14" fill="none" stroke="var(--border)" />
-              <path
-                d="M14 40 L14 24 L22 16 L28 24 L34 14 L42 24 L42 40"
-                fill="none"
-                stroke="var(--accent)"
-                strokeWidth="2.5"
-                strokeLinejoin="round"
-                strokeLinecap="round"
-              />
-              <circle cx="42" cy="24" r="2.6" fill="var(--accent)" />
-            </svg>
+            <Image
+              src={logoMark}
+              alt=""
+              className="h-7 w-7 rounded-[0.6rem] ring-1 ring-[var(--border)]"
+              priority
+            />
             <span className="font-display hidden text-sm font-medium sm:block">
               {profile.firstName} <span className="text-gradient">{profile.lastName}</span>
             </span>
