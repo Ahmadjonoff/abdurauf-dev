@@ -8,6 +8,7 @@ import { ScrollToTop } from "@/components/ScrollToTop";
 import { SITE_URL } from "@/lib/site";
 import { profile } from "@/lib/data";
 import profilePhoto from "@/assets/profile.jpeg";
+import ogImage from "@/assets/og-image.png";
 
 const spaceGrotesk = Space_Grotesk({
   variable: "--font-space-grotesk",
@@ -48,13 +49,13 @@ export const metadata: Metadata = {
     description,
     url: SITE_URL,
     siteName: title,
-    images: [{ url: profilePhoto.src, width: profilePhoto.width, height: profilePhoto.height }],
+    images: [{ url: ogImage.src, width: ogImage.width, height: ogImage.height }],
   },
   twitter: {
     card: "summary_large_image",
     title,
     description,
-    images: [profilePhoto.src],
+    images: [ogImage.src],
   },
   verification: {
     google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION,
