@@ -82,7 +82,7 @@ export const translations: Record<Locale, Translation> = {
       badge: "Available for new work",
       role: "Full-Stack Developer",
       bio: "I build complete products end to end — async Python backends, real-time systems, React/Next.js frontends and AI-assisted tooling — for teams that need the whole stack done right.",
-      ctaPrimary: "Let’s work together",
+      ctaPrimary: "Let’s start a project",
       ctaSecondary: "See the work",
       downloadCV: "Download CV",
       systemCore: "system core",
@@ -248,8 +248,8 @@ export const translations: Record<Locale, Translation> = {
     },
     contact: {
       heading: "Contact",
-      title: "Have a product worth building right?",
-      desc: "I’m currently taking on new freelance and contract work — full-stack builds, async backends, landing pages, or an AI-assisted pipeline you haven’t been able to justify building in-house yet.",
+      title: "Got a project worth building right? Let's talk.",
+      desc: "I take on everything from a one-off landing page or MVP sprint to long-term contract work as your backend/full-stack engineer — Django & FastAPI APIs, real-time WebSocket systems, database performance fixes, or an AI-assisted automation pipeline you've been putting off. Tell me what you're building and I'll tell you honestly if I'm the right fit.",
       labels: { email: "Email", phone: "Phone", telegram: "Telegram", github: "GitHub" },
       footerTagline: "Built with full-stack precision.",
       form: {
@@ -276,7 +276,7 @@ export const translations: Record<Locale, Translation> = {
       badge: "Yangi loyihalarga ochiqman",
       role: "Full-Stack Dasturchi",
       bio: "Men mahsulotlarni boshidan oxirigacha qurib beraman — async Python backend'lar, real-time tizimlar, React/Next.js frontend'lar va AI yordamida ishlaydigan vositalar — butun stackni toʻgʻri qilishni istagan jamoalar uchun.",
-      ctaPrimary: "Birga ishlaylik",
+      ctaPrimary: "Loyihani boshlaylik",
       ctaSecondary: "Ishlarni koʻrish",
       downloadCV: "CV yuklab olish",
       systemCore: "tizim yadrosi",
@@ -442,8 +442,8 @@ export const translations: Record<Locale, Translation> = {
     },
     contact: {
       heading: "Aloqa",
-      title: "Toʻgʻri qurilishi kerak boʻlgan loyihangiz bormi?",
-      desc: "Hozirda yangi freelance va shartnoma ishlarini qabul qilyapman — full-stack loyihalar, async backend'lar, landing page'lar yoki ichki jamoa bilan qurishga hali qaror qilmagan AI yordamida pipeline.",
+      title: "Qurishga arziydigan loyihangiz bormi? Keling, gaplashaylik.",
+      desc: "Bir martalik landing page yoki MVP sprintdan tortib, backend/full-stack muhandisingiz sifatida uzoq muddatli shartnoma ishigacha — hammasini qabul qilaman: Django va FastAPI API'lar, real-time WebSocket tizimlari, ma'lumotlar bazasi tezligini oshirish, yoki hali qoʻlga olishga ulgurmagan AI yordamida avtomatlashtirish pipeline'i. Nima qurayotganingizni ayting — mos kelamanmi yoki yoʻqmi, ochiq aytib beraman.",
       labels: { email: "Email", phone: "Telefon", telegram: "Telegram", github: "GitHub" },
       footerTagline: "Full-stack aniqlik bilan qurilgan.",
       form: {
@@ -470,7 +470,7 @@ export const translations: Record<Locale, Translation> = {
       badge: "Открыт для новых проектов",
       role: "Full-Stack разработчик",
       bio: "Я создаю продукты полностью, от начала до конца — асинхронные бэкенды на Python, real-time системы, фронтенды на React/Next.js и инструменты с AI — для команд, которым нужен весь стек, сделанный правильно.",
-      ctaPrimary: "Давайте работать вместе",
+      ctaPrimary: "Начнём проект",
       ctaSecondary: "Смотреть работы",
       downloadCV: "Скачать резюме",
       systemCore: "ядро системы",
@@ -636,8 +636,8 @@ export const translations: Record<Locale, Translation> = {
     },
     contact: {
       heading: "Контакты",
-      title: "Есть продукт, который стоит построить правильно?",
-      desc: "Сейчас беру новые проекты на фрилансе и по контракту — full-stack разработка, асинхронные бэкенды, лендинги или AI-пайплайн, который вы пока не решались строить своими силами.",
+      title: "Есть проект, который стоит построить правильно? Давайте обсудим.",
+      desc: "Берусь за всё — от разового лендинга или MVP-спринта до долгосрочного контракта в роли вашего backend/full-stack инженера: API на Django и FastAPI, real-time системы на WebSocket, исправление производительности БД или AI-автоматизация, до которой у вас не доходили руки. Расскажите, что строите — честно скажу, подхожу ли я.",
       labels: { email: "Email", phone: "Телефон", telegram: "Telegram", github: "GitHub" },
       footerTagline: "Создано с full-stack точностью.",
       form: {
