@@ -42,7 +42,7 @@ export type Translation = {
     heading: string;
     githubHeading: string;
     viewAll: string;
-    labels: { problem: string; approach: string; result: string; stack: string };
+    labels: { problem: string; approach: string; result: string; stack: string; demo: string };
     items: { slug: string; title: string; desc: string; problem: string; approach: string; result: string }[];
   };
   blog: {
@@ -148,8 +148,19 @@ export const translations: Record<Locale, Translation> = {
       heading: "Projects",
       githubHeading: "Recent on GitHub",
       viewAll: "View all projects",
-      labels: { problem: "Problem", approach: "Approach", result: "Result", stack: "Stack" },
+      labels: { problem: "Problem", approach: "Approach", result: "Result", stack: "Stack", demo: "Watch the demo on LinkedIn" },
       items: [
+        {
+          slug: "unicflo",
+          title: "Unicflo — automated product import & AI pipeline",
+          desc: "A daily scraping and import system for multi-store e-commerce — Google Gemini writes descriptions and auto-categorizes products, and a phash-based pass catches duplicates before they hit the catalog.",
+          problem:
+            "Products from multiple external stores were being imported by hand — slow, error-prone, and full of duplicate listings for the same physical item that had to be caught by eye.",
+          approach:
+            "Built a Django 4.x + PostgreSQL backend with AsyncIO-driven scheduled scraping across multiple stores, plus a custom admin interface for manual imports by date range and store with live progress tracking. Integrated the Google Gemini API to generate product descriptions and auto-categorize items into pricing-relevant subcategories, and added a perceptual-hashing (phash) pass to catch visual duplicates before anything reaches the live catalog.",
+          result:
+            "Store owners get a daily-refreshed catalog with 80% fewer duplicate listings, AI-written descriptions instead of manual copywriting (data quality up ~40%), and a manual-import path for one-off cases — all monitored through an admin panel with progress tracking and error logging.",
+        },
         {
           slug: "online-invitations-platform",
           title: "Online invitations platform",
@@ -178,6 +189,39 @@ export const translations: Record<Locale, Translation> = {
       heading: "Blog",
       viewAll: "View all posts",
       posts: [
+        {
+          slug: "dedup-with-phash-and-gemini",
+          meta: "FIELD NOTES · DATA QUALITY",
+          title: "Killing duplicate product listings with perceptual hashing + Gemini",
+          excerpt: "Two listings with different titles and slightly different photos are often the exact same item.",
+          body: [
+            "Product feeds from multiple external stores overlapped constantly — the same physical item listed under different titles, different photo crops, different sellers. Naive title-matching caught maybe half of it.",
+            "The fix layered two separate signals instead of blending them into one score: perceptual hashing (phash) on product images to catch visual duplicates that string matching missed, and the Google Gemini API to compare descriptions and titles semantically when the images were close but not identical.",
+            "Running both together cut duplicate entries by 80% and raised overall data quality by roughly 40%, measured against a manually-audited sample. The lesson: perceptual similarity and semantic similarity catch different failure modes — treat them as two signals, not one.",
+          ],
+        },
+        {
+          slug: "realtime-dashboard-django-channels",
+          meta: "FIELD NOTES · REAL-TIME SYSTEMS",
+          title: "A real-time production dashboard with Django Channels & Redis",
+          excerpt: "Operators needed to see KPI numbers move the moment they changed — not on the next manual refresh.",
+          body: [
+            "Floor operators were tracking material consumption and output on numbers that were minutes stale, refreshed by hand. Decisions were being made on data that was already out of date by the time anyone looked at it.",
+            "Django Channels with a Redis-backed channel layer gave every dashboard a persistent WebSocket connection; the backend pushed KPI and consumption updates the moment they happened instead of waiting for a poll. Consumers stayed intentionally thin — broadcasting pre-computed state rather than running a query per connection — so fan-out to many open dashboards never turned into a database problem.",
+            "Update latency dropped to sub-second, and operator response time to changing conditions improved by roughly 60% — the gap between \"something changed\" and \"someone reacted\" basically disappeared.",
+          ],
+        },
+        {
+          slug: "bitrix24-crm-integration",
+          meta: "FIELD NOTES · INTEGRATIONS",
+          title: "Automating CRM sync: integrating Bitrix24 via REST API & webhooks",
+          excerpt: "Employee records, departments and orders were being typed into two systems by hand.",
+          body: [
+            "Employee data, department structure and production orders lived in Bitrix24, but the internal system needed the same data — and kept drifting out of sync because someone had to update both places manually.",
+            "REST API calls handled the bulk sync (employees, departments, historical orders), while webhook handlers caught changes as they happened in Bitrix24 and pushed them into the internal system immediately, instead of waiting for a scheduled batch job to catch up.",
+            "Manual data-entry time dropped by 50%, and — more importantly — the two systems stopped disagreeing with each other, which was the actual source of most support tickets before this shipped.",
+          ],
+        },
         {
           slug: "asyncio-85-percent-faster",
           meta: "FIELD NOTES · ASYNC ENGINEERING",
@@ -298,8 +342,19 @@ export const translations: Record<Locale, Translation> = {
       heading: "Loyihalar",
       githubHeading: "GitHub'dagi so'nggi faoliyat",
       viewAll: "Barchasini koʻrish",
-      labels: { problem: "Muammo", approach: "Yondashuv", result: "Natija", stack: "Stack" },
+      labels: { problem: "Muammo", approach: "Yondashuv", result: "Natija", stack: "Stack", demo: "LinkedIn'da demo'ni ko'rish" },
       items: [
+        {
+          slug: "unicflo",
+          title: "Unicflo — avtomatik mahsulot importi va AI pipeline'i",
+          desc: "Bir nechta do'kondan mahsulotlarni har kuni scraping qilib import qiluvchi tizim — Google Gemini tavsif yozadi va kategoriyalaydi, phash asosidagi tekshiruv esa dublikatlarni katalogga tushishidan oldin tutib qoladi.",
+          problem:
+            "Bir nechta tashqi do'kondan mahsulotlar qo'lda import qilinardi — sekin, xatolarga moyil va bitta jismoniy mahsulot uchun ko'z bilan aniqlanishi kerak bo'lgan ko'plab dublikat e'lonlar bilan to'la edi.",
+          approach:
+            "Django 4.x + PostgreSQL asosida backend qurdim, AsyncIO yordamida bir nechta do'kon bo'yicha rejalashtirilgan scraping ishga tushirildi, shuningdek sana oralig'i va do'kon bo'yicha qo'lda import qilish hamda jonli progress kuzatuvi uchun maxsus admin interfeysi yaratildi. Google Gemini API mahsulot tavsiflarini yozish va narxlashga ta'sir qiluvchi subkategoriyalarga avtomatik ajratish uchun, phash asosidagi tekshiruv esa jonli katalogga tushishidan oldin vizual dublikatlarni aniqlash uchun integratsiya qilindi.",
+          result:
+            "Do'kon egalari kuniga yangilanadigan katalogni, 80% kamroq dublikat e'lonlarni, qo'lda yozish o'rniga AI yozgan tavsiflarni (ma'lumot sifati ~40% oshdi) va alohida holatlar uchun qo'lda import qilish imkoniyatini oladilar — bularning barchasi progress kuzatuvi va xatoliklar jurnali bilan admin panel orqali nazorat qilinadi.",
+        },
         {
           slug: "online-invitations-platform",
           title: "Online taklifnomalar platformasi",
@@ -328,6 +383,39 @@ export const translations: Record<Locale, Translation> = {
       heading: "Blog",
       viewAll: "Barchasini koʻrish",
       posts: [
+        {
+          slug: "dedup-with-phash-and-gemini",
+          meta: "DALA YOZUVLARI · MA'LUMOT SIFATI",
+          title: "Perceptual hashing + Gemini bilan dublikat mahsulot e'lonlarini yo'q qilish",
+          excerpt: "Nomi va fotosurati biroz farq qiladigan ikkita e'lon ko'pincha aynan bitta mahsulot bo'ladi.",
+          body: [
+            "Bir nechta tashqi do'kondan kelayotgan mahsulot feed'lari doimo bir-biriga ustma-ust tushardi — bitta jismoniy mahsulot turli nomlar, turli surat kadrlari, turli sotuvchilar ostida e'lon qilingan bo'lardi. Oddiy nom mosligini tekshirish buning yarmisiga yaqinini tutardi, xolos.",
+            "Yechim ikkita alohida signalni bitta ballga aralashtirmasdan, alohida qatlam sifatida qo'lladi: mahsulot suratlarida vizual dublikatlarni tutish uchun perceptual hashing (phash), va surat yaqin, lekin bir xil bo'lmagan hollarda tavsif va nomlarni ma'noviy jihatdan solishtirish uchun Google Gemini API.",
+            "Ikkalasini birga qo'llash dublikat e'lonlarni 80% ga kamaytirdi va qo'lda tekshirilgan namuna bo'yicha umumiy ma'lumot sifatini taxminan 40% ga oshirdi. Xulosa: vizual va ma'noviy o'xshashlik turli xil xatolarni tutadi — ularni bitta emas, ikkita alohida signal sifatida ko'ring.",
+          ],
+        },
+        {
+          slug: "realtime-dashboard-django-channels",
+          meta: "DALA YOZUVLARI · REAL-TIME TIZIMLAR",
+          title: "Django Channels va Redis bilan real-time ishlab chiqarish dashboard'i",
+          excerpt: "Operatorlarga KPI raqamlari o'zgargan zahoti ko'rinishi kerak edi — keyingi qo'lda yangilashda emas.",
+          body: [
+            "Sex operatorlari material sarfi va chiqarilgan mahsulotni bir necha daqiqa eskirgan, qo'lda yangilanadigan raqamlar bo'yicha kuzatishardi. Qarorlar kimdir qarab ulgurguncha eskirib qolgan ma'lumot asosida qabul qilinardi.",
+            "Redis asosidagi channel layer bilan Django Channels har bir dashboard'ga doimiy WebSocket ulanishini berdi; backend so'rov kutmasdan, KPI va sarf yangilanishlarini sodir bo'lgan zahoti yuborardi. Consumer'lar ataylab yengil saqlandi — har bir ulanish uchun so'rov bajarish o'rniga oldindan hisoblangan holatni tarqatishardi — shu tufayli ko'plab ochiq dashboard'larga tarqatish bazaga yuk bo'lib qolmadi.",
+            "Yangilanish kechikishi soniyadan kamga tushdi, operatorning o'zgarishlarga reaksiya vaqti esa taxminan 60% yaxshilandi — \"nimadir o'zgardi\" va \"kimdir reaksiya bildirdi\" orasidagi bo'shliq deyarli yo'qoldi.",
+          ],
+        },
+        {
+          slug: "bitrix24-crm-integration",
+          meta: "DALA YOZUVLARI · INTEGRATSIYALAR",
+          title: "CRM sinxronizatsiyasini avtomatlashtirish: Bitrix24'ni REST API va webhook orqali ulash",
+          excerpt: "Xodimlar ma'lumotlari, bo'limlar va buyurtmalar ikkita tizimga qo'lda kiritilardi.",
+          body: [
+            "Xodimlar ma'lumotlari, bo'lim tuzilishi va ishlab chiqarish buyurtmalari Bitrix24'da saqlanardi, lekin ichki tizimga ham xuddi shu ma'lumot kerak edi — va kimdir ikkala joyni ham qo'lda yangilashi kerakligi sababli ular doimo bir-biridan uzilib qolardi.",
+            "REST API so'rovlari ommaviy sinxronizatsiyani (xodimlar, bo'limlar, tarixiy buyurtmalar) bajardi, webhook handler'lar esa Bitrix24'da o'zgarish sodir bo'lgan zahoti uni tutib, ichki tizimga rejalashtirilgan paket ishini kutmasdan darhol uzatdi.",
+            "Qo'lda ma'lumot kiritish vaqti 50% ga qisqardi, va muhimrog'i — ikkala tizim bir-biriga zid ma'lumot berishni to'xtatdi, aslida ko'pchilik qo'llab-quvvatlash so'rovlarining sababi ham shu edi.",
+          ],
+        },
         {
           slug: "asyncio-85-percent-faster",
           meta: "DALA YOZUVLARI · ASYNC MUHANDISLIK",
@@ -448,8 +536,19 @@ export const translations: Record<Locale, Translation> = {
       heading: "Проекты",
       githubHeading: "Недавнее на GitHub",
       viewAll: "Смотреть все проекты",
-      labels: { problem: "Проблема", approach: "Подход", result: "Результат", stack: "Стек" },
+      labels: { problem: "Проблема", approach: "Подход", result: "Результат", stack: "Стек", demo: "Смотреть демо в LinkedIn" },
       items: [
+        {
+          slug: "unicflo",
+          title: "Unicflo — автоматический импорт товаров и AI-конвейер",
+          desc: "Система ежедневного скрапинга и импорта товаров для мультимагазинного e-commerce — Google Gemini пишет описания и категоризирует товары, а проверка на основе phash отлавливает дубликаты до попадания в каталог.",
+          problem:
+            "Товары из нескольких внешних магазинов импортировались вручную — медленно, с ошибками и множеством дублирующихся объявлений на один и тот же физический товар, которые приходилось замечать на глаз.",
+          approach:
+            "Построил бэкенд на Django 4.x + PostgreSQL с запланированным скрапингом на AsyncIO по нескольким магазинам, а также кастомную админ-панель для ручного импорта по диапазону дат и магазину с отслеживанием прогресса в реальном времени. Интегрировал Google Gemini API для генерации описаний товаров и автоматической категоризации по подкатегориям, влияющим на ценообразование, а также добавил проверку на основе перцептивного хеширования (phash) для отлова визуальных дублей до попадания в общий каталог.",
+          result:
+            "Владельцы магазинов получают ежедневно обновляемый каталог с 80% меньшим числом дублей, описания товаров, написанные AI вместо ручного копирайтинга (качество данных выросло примерно на 40%), и путь для ручного импорта в особых случаях — всё это контролируется через админ-панель с отслеживанием прогресса и логированием ошибок.",
+        },
         {
           slug: "online-invitations-platform",
           title: "Платформа онлайн-приглашений",
@@ -478,6 +577,39 @@ export const translations: Record<Locale, Translation> = {
       heading: "Блог",
       viewAll: "Смотреть все посты",
       posts: [
+        {
+          slug: "dedup-with-phash-and-gemini",
+          meta: "ЗАМЕТКИ · КАЧЕСТВО ДАННЫХ",
+          title: "Уничтожение дублей товаров с помощью perceptual hashing + Gemini",
+          excerpt: "Два объявления с разными названиями и чуть разными фото часто оказываются одним и тем же товаром.",
+          body: [
+            "Товарные фиды из нескольких внешних магазинов постоянно пересекались — один и тот же физический товар был выставлен под разными названиями, с разной обрезкой фото, от разных продавцов. Простое сравнение названий ловило от силы половину таких случаев.",
+            "Решение объединило два отдельных сигнала, не смешивая их в одну оценку: перцептивное хеширование (phash) изображений товаров для отлова визуальных дублей, которые не ловило сравнение строк, и Google Gemini API для семантического сравнения описаний и названий, когда изображения были похожи, но не идентичны.",
+            "Совместное использование обоих подходов сократило число дублей на 80% и подняло общее качество данных примерно на 40% — по оценке вручную проверенной выборки. Вывод: визуальное и семантическое сходство ловят разные типы ошибок — их стоит рассматривать как два отдельных сигнала, а не один смешанный.",
+          ],
+        },
+        {
+          slug: "realtime-dashboard-django-channels",
+          meta: "ЗАМЕТКИ · REAL-TIME СИСТЕМЫ",
+          title: "Real-time дашборд производства на Django Channels и Redis",
+          excerpt: "Операторам нужно было видеть, как меняются KPI, в момент изменения — а не после ручного обновления.",
+          body: [
+            "Операторы на производстве отслеживали расход материалов и выпуск продукции по цифрам, устаревшим на минуты и обновляемым вручную. Решения принимались на основе данных, которые к моменту просмотра уже были неактуальны.",
+            "Django Channels с Redis-based channel layer дал каждому дашборду постоянное WebSocket-соединение; бэкенд отправлял обновления KPI и расхода материалов в момент их появления, вместо ожидания опроса. Consumer'ы намеренно оставались лёгкими — рассылая уже готовое состояние, а не выполняя запрос на каждое соединение — поэтому рассылка на множество открытых дашбордов не превратилась в нагрузку на БД.",
+            "Задержка обновления упала до значений менее секунды, а скорость реакции операторов на изменения выросла примерно на 60% — разрыв между «что-то изменилось» и «кто-то отреагировал» практически исчез.",
+          ],
+        },
+        {
+          slug: "bitrix24-crm-integration",
+          meta: "ЗАМЕТКИ · ИНТЕГРАЦИИ",
+          title: "Автоматизация синхронизации CRM: интеграция Bitrix24 через REST API и вебхуки",
+          excerpt: "Данные сотрудников, отделов и заказов вручную вводились в две системы.",
+          body: [
+            "Данные сотрудников, структура отделов и производственные заказы хранились в Bitrix24, но внутренней системе были нужны те же данные — и они постоянно расходились, потому что кто-то должен был вручную обновлять оба места.",
+            "REST API запросы обеспечивали массовую синхронизацию (сотрудники, отделы, исторические заказы), а обработчики webhook'ов ловили изменения в Bitrix24 в момент их появления и сразу передавали их во внутреннюю систему, не дожидаясь плановой пакетной задачи.",
+            "Время ручного ввода данных сократилось на 50%, и, что важнее, две системы перестали противоречить друг другу — а именно это было источником большинства обращений в поддержку до этого изменения.",
+          ],
+        },
         {
           slug: "asyncio-85-percent-faster",
           meta: "ЗАМЕТКИ · ASYNC-ИНЖЕНЕРИЯ",

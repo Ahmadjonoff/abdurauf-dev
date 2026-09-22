@@ -42,6 +42,11 @@ export const services = [
 ];
 
 export const projects = [
+  {
+    slug: "unicflo",
+    tags: ["Django", "PostgreSQL", "AsyncIO", "Google Gemini"],
+    demoUrl: "https://www.linkedin.com/feed/update/urn:li:activity:7356850965964075008/",
+  },
   { slug: "online-invitations-platform", tags: ["Django", "React", "PostgreSQL"] },
   { slug: "khanate", tags: ["Next.js", "TypeScript", "Landing page"] },
 ];

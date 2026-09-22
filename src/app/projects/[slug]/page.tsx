@@ -14,6 +14,7 @@ export default function ProjectPage() {
   const index = projects.findIndex((p) => p.slug === params.slug);
   const project = index >= 0 ? t.projects.items[index] : undefined;
   const tags = index >= 0 ? projects[index].tags : [];
+  const demoUrl = index >= 0 ? projects[index].demoUrl : undefined;
 
   useEffect(() => {
     document.title = project ? `${project.title} — ${t.meta.title}` : t.meta.title;
@@ -56,6 +57,21 @@ export default function ProjectPage() {
                     </span>
                   ))}
                 </div>
+
+                {demoUrl && (
+                  <a
+                    href={demoUrl}
+                    target="_blank"
+                    rel="noopener"
+                    data-hover
+                    className="font-medium mt-5 inline-flex items-center gap-1.5 rounded-full bg-[var(--accent)] px-4 py-2 text-sm text-[var(--accent-ink)] transition-transform hover:scale-[1.03]"
+                  >
+                    <svg viewBox="0 0 24 24" className="h-3.5 w-3.5" fill="none" stroke="currentColor" strokeWidth={2}>
+                      <path d="M8 5v14l11-7Z" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                    {t.projects.labels.demo}
+                  </a>
+                )}
 
                 <div className="mt-10 space-y-8 border-t border-[var(--border)] pt-8">
                   <div>
